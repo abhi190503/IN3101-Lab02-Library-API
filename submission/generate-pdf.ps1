@@ -12,14 +12,14 @@ $outputPdf = Join-Path $projectDirectory '234006L_IN3101_Lab02.pdf'
 $temporaryHtml = Join-Path $submissionDirectory 'submission-preview.html'
 
 $pages = @(
-    @{ Heading = 'S1 - Postman Create Book'; File = 'S1-Postman-Create-Book.png' },
-    @{ Heading = 'S2 - Postman List All Books'; File = 'S2-Postman-List-All-Books.png' },
-    @{ Heading = 'S3 - Postman Get One Book'; File = 'S3-Postman-Get-One-Book.png' },
-    @{ Heading = 'S4 - Postman Update Book'; File = 'S4-Postman-Update-Book.png' },
-    @{ Heading = 'S5 - Postman Delete Book'; File = 'S5-Postman-Delete-Book.png' },
-    @{ Heading = 'S6 - Postman Deleted Book'; File = 'S6-Postman-Deleted-Book.png' },
-    @{ Heading = 'S7 - Postman Validation'; File = 'S7-Postman-Validation.png' },
-    @{ Heading = 'S8 - Swagger Documentation'; File = 'S8-Swagger-Documentation.png' }
+    @{ Heading = 'S1 - Postman Create Book'; File = 'S1_Postman_Create.png' },
+    @{ Heading = 'S2 - Postman List All Books'; File = 'S2_Postman_List.png' },
+    @{ Heading = 'S3 - Postman Get One Book'; File = 'S3_Postman_GetOne.png' },
+    @{ Heading = 'S4 - Postman Update Book'; File = 'S4_Postman_Update.png' },
+    @{ Heading = 'S5 - Postman Delete Book'; File = 'S5_Postman_Delete.png' },
+    @{ Heading = 'S6 - Postman Deleted Book'; File = 'S6_Postman_NotFound.png' },
+    @{ Heading = 'S7 - Postman Validation'; File = 'S7_Postman_Validation.png' },
+    @{ Heading = 'S8 - Swagger Documentation'; File = 'S8_Swagger_Documentation.png' }
 )
 
 $missingFiles = $pages | Where-Object { -not (Test-Path -LiteralPath (Join-Path $screenshotDirectory $_.File)) }
@@ -60,6 +60,7 @@ $html = @"
 <body>
 <section class="cover">
   <h1>University of Moratuwa</h1>
+  <h2>Faculty of Information Technology</h2>
   <h2>IN3101 - Enterprise Application Development</h2>
   <h2>Lab Sheet 02 - Building a REST API with Spring Boot</h2>
   <div class="details">

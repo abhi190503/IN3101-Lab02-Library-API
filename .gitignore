@@ -27,3 +27,10 @@ target/
 Thumbs.db
 .env
 *.log
+
+### Local submission evidence and runtime state ###
+submission/app.pid
+submission/postman-current.png
+submission/submission-preview.html
+submission/screenshots/*.png
+234006L_IN3101_Lab02.pdf

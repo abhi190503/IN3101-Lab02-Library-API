@@ -2,14 +2,14 @@
 
 Place the eight genuine screenshots in `submission/screenshots` using these exact filenames:
 
-1. `S1-Postman-Create-Book.png`
-2. `S2-Postman-List-All-Books.png`
-3. `S3-Postman-Get-One-Book.png`
-4. `S4-Postman-Update-Book.png`
-5. `S5-Postman-Delete-Book.png`
-6. `S6-Postman-Deleted-Book.png`
-7. `S7-Postman-Validation.png`
-8. `S8-Swagger-Documentation.png`
+1. `S1_Postman_Create.png`
+2. `S2_Postman_List.png`
+3. `S3_Postman_GetOne.png`
+4. `S4_Postman_Update.png`
+5. `S5_Postman_Delete.png`
+6. `S6_Postman_NotFound.png`
+7. `S7_Postman_Validation.png`
+8. `S8_Swagger_Documentation.png`
 
 Then generate the final PDF from the project root:
 

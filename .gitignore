@@ -33,3 +33,6 @@ Thumbs.db
 /submission/
 234006L_IN3101_Lab02.pdf
 .postman-evidence*/
+
+### Local API client files ###
+/postman/

@@ -4,6 +4,15 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
+public static class ScreenDpi {
+    [DllImport("user32.dll")]
+    public static extern bool SetProcessDPIAware();
+}
+'@
+[ScreenDpi]::SetProcessDPIAware() | Out-Null
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 

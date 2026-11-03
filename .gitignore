@@ -1,5 +1,5 @@
 HELP.md
-target/
+/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -26,12 +26,10 @@ target/
 .DS_Store
 Thumbs.db
 .env
+.env.*
 *.log
 
-### Local submission evidence and runtime state ###
-submission/app.pid
-submission/postman-current.png
-submission/submission-preview.html
-submission/screenshots/*.png
+### Local submission and evidence files ###
+/submission/
 234006L_IN3101_Lab02.pdf
 .postman-evidence*/

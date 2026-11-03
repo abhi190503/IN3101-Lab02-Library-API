@@ -1,0 +1,126 @@
+{
+  "info": {
+    "_postman_id": "2340061a-b002-4000-8000-000000000002",
+    "name": "IN3101 Lab02 - 234006L",
+    "description": "Ordered requests for IN3101 Lab 02 evidence. Run from top to bottom against the local API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "cleanCodeId", "value": "" },
+    { "key": "deletedBookId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "S1 - Create Book",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"234006L - Clean Code\",\n  \"author\": \"Robert C. Martin\",\n  \"isbn\": \"9780132350884\",\n  \"price\": 4500.00\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/books"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+          "const body = pm.response.json();",
+          "pm.expect(body.id).to.be.a('number');",
+          "pm.collectionVariables.set('cleanCodeId', body.id);"
+        ] }
+      }]
+    },
+    {
+      "name": "Setup - Create Design Patterns",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Design Patterns\",\n  \"author\": \"Erich Gamma\",\n  \"isbn\": \"9780201633610\",\n  \"price\": 5500.00\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/books"
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 201', () => pm.response.to.have.status(201));"] } }]
+    },
+    {
+      "name": "Setup - Create Effective Java",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Effective Java\",\n  \"author\": \"Joshua Bloch\",\n  \"isbn\": \"9780134685991\",\n  \"price\": 6200.00\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/books"
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+          "pm.collectionVariables.set('deletedBookId', pm.response.json().id);"
+        ] }
+      }]
+    },
+    {
+      "name": "S2 - List All Books",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/books" },
+      "event": [{ "listen": "test", "script": { "exec": [
+        "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+        "pm.test('At least three books returned', () => pm.expect(pm.response.json().length).to.be.at.least(3));",
+        "pm.test('Contains student index title', () => pm.expect(pm.response.json().some(b => b.title === '234006L - Clean Code')).to.be.true);"
+      ] } }]
+    },
+    {
+      "name": "S3 - Get One Book",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/books/{{cleanCodeId}}" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 200', () => pm.response.to.have.status(200));"] } }]
+    },
+    {
+      "name": "S4 - Update Book",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"234006L - Clean Code (Updated)\",\n  \"author\": \"Robert C. Martin\",\n  \"isbn\": \"9780132350884\",\n  \"price\": 4750.00\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/books/{{cleanCodeId}}"
+      },
+      "event": [{ "listen": "test", "script": { "exec": [
+        "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+        "pm.test('Book was updated', () => pm.expect(pm.response.json().title).to.include('(Updated)'));"
+      ] } }]
+    },
+    {
+      "name": "S5 - Delete Book",
+      "request": { "method": "DELETE", "header": [], "url": "{{baseUrl}}/api/books/{{deletedBookId}}" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 204', () => pm.response.to.have.status(204));"] } }]
+    },
+    {
+      "name": "S6 - Get Deleted Book",
+      "request": { "method": "GET", "header": [], "url": "{{baseUrl}}/api/books/{{deletedBookId}}" },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 404', () => pm.response.to.have.status(404));"] } }]
+    },
+    {
+      "name": "S7 - Validation Error",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"\",\n  \"author\": \"Test Author\",\n  \"isbn\": \"1234567890\",\n  \"price\": 1000.00\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/books"
+      },
+      "event": [{ "listen": "test", "script": { "exec": ["pm.test('Status is 400', () => pm.response.to.have.status(400));"] } }]
+    }
+  ]
+}

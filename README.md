@@ -80,3 +80,51 @@ After starting the application, the API documentation is available at:
 
 - Swagger UI: `http://localhost:8080/swagger-ui.html`
 - OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+
+## Docker Setup (Lab 03)
+
+### Prerequisites
+
+- Docker Desktop / Docker Engine
+- Docker Compose
+
+### Configuration
+
+Copy `.env.example` to `.env` and set the database password (default: `root123`):
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### Build and Run with Docker Compose
+
+1. Build the application executable JAR:
+
+```powershell
+.\mvnw.cmd clean package -DskipTests
+```
+
+2. Start the database and API containers:
+
+```powershell
+docker compose up --build -d
+```
+
+3. Verify service status:
+
+```powershell
+docker compose ps
+```
+
+4. View API logs:
+
+```powershell
+docker compose logs -f api
+```
+
+5. Stop services (preserving persistent database volume):
+
+```powershell
+docker compose down
+```
+

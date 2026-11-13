@@ -27,6 +27,7 @@ HELP.md
 Thumbs.db
 .env
 .env.*
+!.env.example
 *.log
 
 ### Local submission and evidence files ###
